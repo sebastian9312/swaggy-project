@@ -1,45 +1,38 @@
-// import "./categories.styles.scss"
+import CategoryMenu from "./components/category-menu/category-menu";
 
 const App = () => {
 
   const categories = [
     {
-      id: 1,
-      title: "HATS"
+      "id": 1,
+      "title": "hats",
+      "imageUrl": "https://i.ibb.co/cvpntL1/hats.png"
     },
     {
-      id: 2,
-      title: "JACKETS"
+      "id": 2,
+      "title": "jackets",
+      "imageUrl": "https://i.ibb.co/px2tCc3/jackets.png"
     },
     {
-      id: 3,
-      title: "SNICKERS"
+      "id": 3,
+      "title": "sneakers",
+      "imageUrl": "https://i.ibb.co/0jqHpnp/sneakers.png"
     },
     {
-      id: 4,
-      title: "WOMANS"
+      "id": 4,
+      "title": "womens",
+      "imageUrl": "https://i.ibb.co/GCCdy8t/womens.png"
     },
     {
-      id: 5,
-      title: "MANS"
-    },
+      "id": 5,
+      "title": "mens",
+      "imageUrl": "https://i.ibb.co/R70vBrQ/men.png"
+    }
   ];
 
   return (
-    <div className="categories-container">
-      {categories.map(({ title, id }) => {
-        return (
-          <div className="category-container" key={id}>
-            {/* <img /> */}
-            <div className="category-body-container">
-              <h2>{title}</h2>
-              <p>SHOP NOW</p>
-            </div>
-          </div>
-        )
-      })}
-    </div>
-  );
-}
+    <CategoryMenu categories={categories} />
+  )
+};
 
 export default App;
