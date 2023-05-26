@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithRedirect, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -17,12 +17,50 @@ const firebaseApp = initializeApp(firebaseConfig);
 
 const provider = new GoogleAuthProvider();
 
-// provider.setCustomParameters({
-//     prompt: "select_account"
-// });
+//
+
+provider.setCustomParameters({
+    prompt: "select_account"
+});
+
+//
 
 export const auth = getAuth(firebaseApp);
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
 
 const db = getFirestore(firebaseApp);
+
+export const createUserDocumentFromAuth = async (userAuth) => {
+    const userDocRef = doc(db, "users", userAuth.uid)
+
+    // console.log(userDocRef);
+
+    const userSnapshot = await getDoc(userDocRef);
+
+    if (!userSnapshot.exists()) {
+        const { uid, displayName, email } = userAuth;
+        const createAt = new Date();
+
+        try {
+            await setDoc(userDocRef, {
+                createAt,
+                uid,
+                displayName,
+                email
+            })
+        } catch (error) {
+            console.log(`Problem, error is: ${error}`);
+        };
+    };
+
+    return userDocRef;
+
+    // console.log(userSnapshot.exists());
+};
+
+
+
+
+
+
