@@ -6,13 +6,6 @@ const SignIn = () => {
         const response = await signInWithGooglePopup();
 
         createUserDocumentFromAuth(response.user);
-
-        console.log(response.user);
-
-        // console.log(response.user.displayName);
-        // console.log(response.user.email);
-
-
     };
 
     return (
