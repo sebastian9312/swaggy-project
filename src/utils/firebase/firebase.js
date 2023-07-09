@@ -64,42 +64,5 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
 
 
 
-// export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
-//     const userDocRef = doc(db, "users", userAuth.uid)
-
-//     // console.log(userDocRef);
-
-//     const userSnapshot = await getDoc(userDocRef);
-
-//     if (!userSnapshot.exists()) {
-//         const { uid, displayName, email } = userAuth;
-//         const createAt = new Date();
-
-//         try {
-//             await setDoc(userDocRef, {
-//                 createAt,
-//                 uid,
-//                 displayName,
-//                 email,
-//                 ...additionalInformation
-//             })
-//         } catch (error) {
-//             console.log(`Problem, error is: ${error}`);
-//         };
-//     };
-
-//     return userDocRef;
-
-//     // console.log(userSnapshot.exists());
-// };
-
-// export const createAuthUserWithEmailAndPassword = async (email, password) => {
-//     if (!email || !password) return;
-
-//     return await createUserWithEmailAndPassword(auth, email, password);
-// };
-
-
-
 
 
