@@ -23,10 +23,11 @@ provider.setCustomParameters({
 });
 
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+export const signInWithGoogleRedirect = () => signInWithRedirect(auth, provider);
 
 // getting data from auth to db
 
-export const createUserDocumentFromAuth = async (userAuth) => {
+export const createUserDocumentFromAuth = async (userAuth, additionalInformation) => {
     const userDocRef = doc(db, "users", userAuth.uid);
     const userSnapshot = await getDoc(userDocRef);
 
@@ -35,7 +36,7 @@ export const createUserDocumentFromAuth = async (userAuth) => {
         const createdAt = new Date();
 
         try {
-            await setDoc(userDocRef, { displayName, email, createdAt });
+            await setDoc(userDocRef, { displayName, email, createdAt, ...additionalInformation });
         } catch (e) {
             console.log(e.message);
         };
@@ -44,6 +45,13 @@ export const createUserDocumentFromAuth = async (userAuth) => {
     return userDocRef;
 };
 
+// EMAIL AND PASSWORD
+
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+    if (!email || !password) return;
+
+    return await createUserWithEmailAndPassword(auth, email, password);
+};
 
 
 
