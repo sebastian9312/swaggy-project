@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithRedirect, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -23,7 +23,6 @@ provider.setCustomParameters({
 });
 
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
-export const signInWithGoogleRedirect = () => signInWithRedirect(auth, provider);
 
 // getting data from auth to db
 
@@ -53,13 +52,41 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
     return await createUserWithEmailAndPassword(auth, email, password);
 };
 
-export const signIn = (email, password) => signInWithEmailAndPassword(auth, email, password);
+// export const signIn = (email, password) => signInWithEmailAndPassword(auth, email, password);
+
+export const signInAuthUserWithEmailAndPassword = async (email, password) => {
+    if (!email || !password) return;
+
+    return await signInWithEmailAndPassword(auth, email, password);
+};
+
+// Signing OUT
+
+// export const signOutUser = () => signOut(auth);
+export const signOutUser = async () => await signOut(auth);
 
 
 
 
 
 
+
+
+
+// export const signInWithGoogleRedirect = () => signInWithRedirect(auth, provider);
+
+// const asyncRedirect = async () => {
+//     const response = await getRedirectResult(auth);
+//     if (response) {
+//         await createUserDocumentFromAuth(response.user);
+//     };
+// };
+// useEffect(() => {
+//     asyncRedirect();
+// }, []);
+
+// <button onClick={signInWithGoogleRedirect}>Sign up with google R</button>
+// import { getRedirectResult } from "firebase/auth";
 
 
 
