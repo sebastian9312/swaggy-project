@@ -73,25 +73,23 @@ export const CartProvider = ({ children }) => {
         });
     };
 
-    const value = { 
-        isCartOpen, 
-        setIsCartOpen, 
-        cartItems, 
-        addItemToCart, 
-        cartCount, 
-        clearItemFromCart, 
-        removeItemFromCart, 
-        cartTotal 
+    const value = {
+        isCartOpen,
+        setIsCartOpen,
+        cartItems,
+        addItemToCart,
+        cartCount,
+        clearItemFromCart,
+        removeItemFromCart,
+        cartTotal
     };
 
     return <CartContext.Provider value={value}>{children}</CartContext.Provider>
 };
 
 
-    // const addItemToCart = (productToAdd) => {
-    //     setCartItems(addCartItem(cartItems, productToAdd));
-    // };
-    
+
+
 // const addCartItem = (cartItems, productToAdd) => {
 //     const isProductExists = cartItems.find(item => item.id === productToAdd.id);
 
@@ -105,6 +103,10 @@ export const CartProvider = ({ children }) => {
 //     };
 //     return [...cartItems, { ...productToAdd, quantity: 1 }];
 // };
+
+    // const addItemToCart = (productToAdd) => {
+    //     setCartItems(addCartItem(cartItems, productToAdd));
+    // };
 
 
 
