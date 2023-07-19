@@ -2,25 +2,23 @@ import "./shop.styles.scss";
 
 import { CategoriesContext } from "../../contexts/categories.context";
 import { useContext } from "react";
-import CategoryPreview from "../../components/category-preview/category-preview";
+import { Route, Routes } from "react-router-dom";
+import CategoriesPreview from "../categories-preview/categories-preview";
 
 const Shop = () => {
-    const { categoriesMap } = useContext(CategoriesContext);
 
     return (
-        <div>
-            {
-                Object.keys(categoriesMap).map((title) => {
-                    const products = categoriesMap[title];
-
-                    return <CategoryPreview key={title} title={title} products={products} />
-                })
-            }
-        </div>
+        <Routes>
+            <Route index element={<CategoriesPreview />} />
+        </Routes>
     );
-
-
 };
+
+export default Shop;
+
+
+
+
 
 //     return (
 //         <>
@@ -48,4 +46,3 @@ const Shop = () => {
 //     );
 // };
 
-export default Shop;
