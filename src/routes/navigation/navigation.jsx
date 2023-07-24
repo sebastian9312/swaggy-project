@@ -1,7 +1,9 @@
 import { Link, Outlet } from "react-router-dom";
+// import { ReactComponent as SwaggyLogo } from "../../assets/dog-logo.svg";
 import { ReactComponent as SwaggyLogo } from "../../assets/swaggy.svg";
 
-import "./navigation.styles.scss";
+import { LogoContainer, NavLink, NavLinks, NavigationContainer } from "./navigation.styles.jsx";
+
 import { useContext } from "react";
 import { UserContext } from "../../contexts/user.context";
 
@@ -12,7 +14,7 @@ import { CartContext } from "../../contexts/cart.context";
 
 const Navigation = () => {
     const { currentUser } = useContext(UserContext);
-    const { isCartOpen, setIsCartOpen } = useContext(CartContext);
+    const { isCartOpen } = useContext(CartContext);
 
     // const signOutHandler = async () => {
     //     const response = await signOutUser();
@@ -21,23 +23,23 @@ const Navigation = () => {
 
     return (
         <>
-            <div className="navigation">
-                <Link className="logo-container" to="/">
+            <NavigationContainer>
+                <LogoContainer to="/">
                     <SwaggyLogo className="logo" />
-                </Link>
-                <div className="nav-links-container">
-                    <Link className="nav-link" to="/shop">
+                </LogoContainer>
+                <NavLinks>
+                    <NavLink to="/shop">
                         SHOP
-                    </Link>
+                    </NavLink>
                     {
                         currentUser
-                            ? <span onClick={signOutUser} className="nav-link">Sign Out</span>
-                            : <Link className="nav-link" to="/auth">SIGN IN</Link>
+                            ? <NavLink as="span" onClick={signOutUser}>Sign Out</NavLink>
+                            : <NavLink to="/auth">SIGN IN</NavLink>
                     }
                     <CartIcon />
-                </div>
+                </NavLinks>
                 {isCartOpen && <CartDropdown />}
-            </div>
+            </NavigationContainer>
             <Outlet />
         </>
     );
