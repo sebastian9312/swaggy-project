@@ -1,11 +1,8 @@
-import { useState, useContext } from "react";
-import { signInWithGooglePopup, createUserDocumentFromAuth, auth, signIn, signInAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase";
+import { useState } from "react";
+import { signInWithGooglePopup, signInAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase";
 import FormInput from "../form-input/form-input";
-import Button from "../button/button";
-
-import { UserContext } from "../../contexts/user.context";
-
-import "./sign-in-form.styles.scss";
+import Button, { BUTTON_TYPE_CLASSES } from "../button/button";
+import { ButtonsContainer, SignInContainer } from "./sign-in-form.styles";
 
 
 const defaultFormFields = {
@@ -17,8 +14,6 @@ const SignInForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { email, password } = formFields;
 
-    // const { setCurrentUser } = useContext(UserContext);
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormFields({ ...formFields, [name]: value });
@@ -28,8 +23,7 @@ const SignInForm = () => {
         e.preventDefault();
 
         try {
-            const { user } = await signInAuthUserWithEmailAndPassword(email, password);
-            // setCurrentUser(user);
+            await signInAuthUserWithEmailAndPassword(email, password);
             setFormFields(defaultFormFields);
         } catch (error) {
             switch (error.code) {
@@ -47,24 +41,21 @@ const SignInForm = () => {
 
     const signInWithGoogle = async () => {
         await signInWithGooglePopup();
-
-        // const { user } = await signInWithGooglePopup();
-        // await createUserDocumentFromAuth(user);
     };
 
     return (
-        <div className="sign-in-container">
+        <SignInContainer>
             <h2>Already have an account?</h2>
             <span>Sign In with your Email and Password</span>
             <form onClick={handleSubmit}>
                 <FormInput label="Email" required type="email" onChange={handleChange} name="email" value={email} />
                 <FormInput label="Password" required type="password" onChange={handleChange} name="password" value={password} />
-                <div className="buttons-container">
+                <ButtonsContainer>
                     <Button type="submit" onClick={handleSubmit}>Sign In</Button>
-                    <Button type="button" buttonType="google" onClick={signInWithGoogle}>Google Sign In</Button>
-                </div>
+                    <Button type="button" buttonType={BUTTON_TYPE_CLASSES.google} onClick={signInWithGoogle}>Google Sign In</Button>
+                </ButtonsContainer>
             </form>
-        </div>
+        </SignInContainer>
     );
 };
 

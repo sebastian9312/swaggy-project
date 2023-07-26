@@ -1,12 +1,8 @@
-import { Link, Outlet } from "react-router-dom";
-// import { ReactComponent as SwaggyLogo } from "../../assets/dog-logo.svg";
+import { Outlet } from "react-router-dom";
 import { ReactComponent as SwaggyLogo } from "../../assets/swaggy.svg";
-
 import { LogoContainer, NavLink, NavLinks, NavigationContainer } from "./navigation.styles.jsx";
-
 import { useContext } from "react";
 import { UserContext } from "../../contexts/user.context";
-
 import { signOutUser } from "../../utils/firebase/firebase";
 import CartIcon from "../../components/cart-icon/cart-icon";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown";
@@ -15,11 +11,6 @@ import { CartContext } from "../../contexts/cart.context";
 const Navigation = () => {
     const { currentUser } = useContext(UserContext);
     const { isCartOpen } = useContext(CartContext);
-
-    // const signOutHandler = async () => {
-    //     const response = await signOutUser();
-    //     setCurrentUser(null);
-    // };
 
     return (
         <>

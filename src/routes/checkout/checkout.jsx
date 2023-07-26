@@ -1,5 +1,3 @@
-import "./checkout.styles.jsx";
-
 import { useContext } from "react";
 import CheckoutItem from "../../components/checkout-item/checkout-item";
 import { CartContext } from "../../contexts/cart.context";

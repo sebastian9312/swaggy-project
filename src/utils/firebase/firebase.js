@@ -42,6 +42,7 @@ provider.setCustomParameters({
 
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
+
 // getting data from auth to db
 
 export const createUserDocumentFromAuth = async (userAuth, additionalInformation) => {
@@ -62,6 +63,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
     return userDocRef;
 };
 
+
 // EMAIL AND PASSWORD
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
@@ -76,6 +78,7 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
     return await signInWithEmailAndPassword(auth, email, password);
 };
 
+
 // Signing OUT
 
 export const signOutUser = async () => await signOut(auth);
@@ -86,24 +89,7 @@ export const signOutUser = async () => await signOut(auth);
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
 
 
-// Adding DATA to firestore DB from js objects file
-
-
-export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
-    const collectionRef = collection(db, collectionKey);
-    const batch = writeBatch(db);
-
-    objectsToAdd.forEach((object) => {
-        const docRef = doc(collectionRef, object.title.toLowerCase());
-        batch.set(docRef, object);
-    });
-
-    await batch.commit();
-    console.log("done");
-};
-
 // getting DATA (categories, documents) from firestore DB
-
 
 export const getCategoriesAndDocuments = async () => {
     const collectionRef = collection(db, "categories");
@@ -121,6 +107,20 @@ export const getCategoriesAndDocuments = async () => {
 };
 
 
+// Adding DATA to firestore DB from js objects file
+
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+    const collectionRef = collection(db, collectionKey);
+    const batch = writeBatch(db);
+
+    objectsToAdd.forEach((object) => {
+        const docRef = doc(collectionRef, object.title.toLowerCase());
+        batch.set(docRef, object);
+    });
+
+    await batch.commit();
+    console.log("done");
+};
 
 
 
@@ -133,26 +133,6 @@ export const getCategoriesAndDocuments = async () => {
 
 
 
-
-
-
-
-
-
-// export const signInWithGoogleRedirect = () => signInWithRedirect(auth, provider);
-
-// const asyncRedirect = async () => {
-//     const response = await getRedirectResult(auth);
-//     if (response) {
-//         await createUserDocumentFromAuth(response.user);
-//     };
-// };
-// useEffect(() => {
-//     asyncRedirect();
-// }, []);
-
-// <button onClick={signInWithGoogleRedirect}>Sign up with google R</button>
-// import { getRedirectResult } from "firebase/auth";
 
 
 
