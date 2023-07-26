@@ -5,7 +5,7 @@ A training project aimed at improving React and Firebase skills.
 ## General info
 Thanks to this project I improved e.g. state management in application with React Context, 
 fetching data from users using Firebase authentication methods and storing that data in Firebase Firestore DB, 
-making collections in Firestore DB and getting data from those collections to application.
+making collections in Firestore DB and getting data from those collections to the application.
 
 ## Technologies
 Project is created with:
