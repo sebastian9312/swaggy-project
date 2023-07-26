@@ -1,5 +1,4 @@
-# SWAGGY
-## Clothing e-commerce platform 
+# SWAGGY - Clothing e-commerce platform 
 A training project aimed at improving React and Firebase skills.
 
 ## General info
